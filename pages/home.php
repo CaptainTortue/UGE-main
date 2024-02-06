@@ -36,12 +36,12 @@ if (isset($_SESSION['niveau'])) {
     <?php
     if ($_SESSION['niveau'] == 1) {
         include ROOT . "/includes/components/client__account.php";
-        //header("Location: /pages/kyrianlapatate.php"); @TODO a voir si faut sup ou modif
+        header("Location: /pages/kyrianlapatate.php");
     } else if ($_SESSION['niveau'] == 2) {
         include ROOT . "/includes/components/admin__clients_manage.php";
     } else if ($_SESSION['niveau'] == 3) {
         include ROOT . "/includes/components/product_owner__home.php";
-        //header("Location: /pages/kyrianlapatate.php"); @TODO a voir si faut sup ou modif
+        header("Location: /pages/kyrianlapatate.php");
     }
     ?>
 

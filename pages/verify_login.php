@@ -15,13 +15,11 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     $password = strtoupper($password);
 
     $req = $cnx->prepare("SELECT niveau FROM Compte WHERE id = :login AND mdp = :password");
-    $req->bindParam(':login', $login, PDO::PARAM_STR);
-    $req->bindParam(':password', $password, PDO::PARAM_STR);
+    $req->bindParam(':login', $login);
+    $req->bindParam(':password', $password);
     $req->execute();
+
     $result = $req->fetch();
-    print_r($result);
-    print_r($login."\n");
-    print_r($password);
     session_start();
     if (!isset($_SESSION['try'])) {
         $_SESSION['try'] = 1;
@@ -51,6 +49,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
         if($_SESSION['try'] >= 3){
             setcookie('blocked', true, time() + 3600);
         }
+        
 
         header('Location: /pages/login.php?error=1');   // si erreur, on redirige vers la page de connexion
         exit();

@@ -1,15 +1,15 @@
 <?php
 
 $permissions = [
-    1 => [
+    4 => [
         'status' => 'commercant',
         'titre' => 'Mon compte',
     ],
-    2 => [
+    5 => [
         'status' => 'administateur',
         'titre' => 'Gestion des comptes',
     ],
-    3 => [
+    6 => [
         'status' => 'product owner',
         'titre' => 'Accueil',
     ],

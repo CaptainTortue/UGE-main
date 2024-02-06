@@ -12,7 +12,7 @@
             text: 'Impayés/Chiffre d\'affaires'
         },
         xAxis: {
-            categories: <?php echo json_encode($array_dates); ?>,
+            categories: <?php echo $array_dates; ?>,
             crosshair: true
         },
         yAxis: {
