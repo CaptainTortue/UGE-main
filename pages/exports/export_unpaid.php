@@ -9,9 +9,9 @@
             header("Content-Type: application/csv"); // récupère le type/format demandé
             header("Content-Disposition: attachment; filename=IMPAYES ".date('d/m/Y').".csv;"); // créer le fichier avec le nom entré dans filename 
             $file = fopen('php://output', 'w');
-            fputcsv($file, ["SIREN","Date vente","Date traitement","Numero Carte","Reseau","Numero Dossier","Devise","Montant","Libelle"], ' ');
+            fputcsv($file, ["SIREN","Date vente","Date traitement","Numero Carte","Reseau","Numero Dossier","Devise","Montant","Libelle"], ',');
             foreach($tab AS $ligne) { // parcours le tableau des impayés
-                fputcsv($file, [$ligne['SIREN'],$ligne['date_vente'],$ligne['date_traitement'],$ligne['num_carte'],$ligne['reseau'],$ligne['num_dos'],"EUR",'-'.$ligne['montant'],$ligne['libelle']], ' '); // ajoute dans le fichier ($file) le tableau case par case
+                fputcsv($file, [$ligne['SIREN'],$ligne['date_vente'],$ligne['date_traitement'],$ligne['num_carte'],$ligne['reseau'],$ligne['num_dos'],"EUR",'-'.$ligne['montant'],$ligne['libelle']], ','); // ajoute dans le fichier ($file) le tableau case par case
             }
             fputcsv($file, ["EXTRAIT DU ".date('d/m/Y')], ' ');
             fclose($file);

@@ -9,7 +9,7 @@ include(dirname(__FILE__, 2) . "/includes/cnx.inc.php");
 if (isset($_POST['login']) && isset($_POST['password'])) {
     $login = htmlspecialchars($_POST['login']);
     $password = htmlspecialchars($_POST['password']);
-    $password = hash("sha1", $password);
+    $password = hash("sha256", $password);
 
     //make password uppercase
     $password = strtoupper($password);

@@ -21,11 +21,11 @@
             {
                 foreach($tab1 AS $ligne) { // parcours le tableau des remises
                     fputcsv($file, ["LISTE DES TRANSACTIONS DE LA REMISE DE L'ENTREPRISE ".$ligne[1].", No DE SIREN ".$ligne[0]." LE ".$ligne[3]], ' ');
-                    fputcsv($file, ["SIREN", "Date vente", "Numero Carte", "Reseau", "Numero Autorisation", "Devise", "Montant", "Sens"], ' ');
+                    fputcsv($file, ["SIREN", "Date vente", "Numero Carte", "Reseau", "Numero Autorisation", "Devise", "Montant", "Sens"], ',');
                     foreach($tab2 AS $remises) { // parcours les remises
                         foreach($remises AS $remise) { // parcours le détail des transactions de chaque remise
                             if ($remise['SIREN'] == $ligne[0] && $ligne[3] == $remise['date_traitement']) { // si le SIREN et la date de traitement correspond à la remise ($remise)
-                                fputcsv($file, [$remise['SIREN'], $remise['date_vente'], $remise['num_carte'], $remise['reseau'], $remise['num_autorisation'], "EUR", $remise['montant'], $remise['sens']], ' '); // ajoute dans le fichier ($file) le tableau case par case
+                                fputcsv($file, [$remise['SIREN'], $remise['date_vente'], $remise['num_carte'], $remise['reseau'], $remise['num_autorisation'], "EUR", $remise['montant'], $remise['sens']], ','); // ajoute dans le fichier ($file) le tableau case par case
                             }
                         }
                     }

@@ -10,10 +10,10 @@
             header("Content-Type: application/csv");
             header("Content-Disposition: attachment; filename=TRESORERIE ".date('d/m/Y').".csv;");
             $file = fopen('php://output', 'w');
-            fputcsv($file, ["SIREN","Raison sociale","Nombre de transactions","Montant total"], ' ');
+            fputcsv($file, ["SIREN","Raison sociale","Nombre de transactions","Montant total"], ',');
             foreach($tab AS $solde) { // parcours le tableau des soldes
                 foreach($solde as $ligne) { // parcours les stdClass
-                    fputcsv($file, [$ligne->SIREN,$ligne->Raison_sociale,$ligne->nbT,$ligne->montant_total], ' '); // ajoute dans le fichier ($file) le tableau case par case
+                    fputcsv($file, [$ligne->SIREN,$ligne->Raison_sociale,$ligne->nbT,$ligne->montant_total], ','); // ajoute dans le fichier ($file) le tableau case par case
                 }
             }
             fputcsv($file, ["Solde de compte à la date: $date"]);
