@@ -151,7 +151,7 @@ function load_clients()
 function display_clients()
 {
 
-    require(dirname(__FILE__) . '/cnx.inc.php');
+    require(dirname(_FILE) . '/../cnx.inc.php');
 
     $req = $cnx->prepare("SELECT SIREN, Raison_sociale, id FROM commercant");
     $req->execute();
