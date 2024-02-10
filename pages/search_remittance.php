@@ -55,7 +55,7 @@ include ROOT . "/includes/cnx.inc.php";
             <img src="<?= $basepath ?>/src/img/unpaid.svg" alt="Unpaid icon">
         </div>
 
-        <div class="icon_container" onclick="window.location.href='/pages/laura_la_plus_belle.php'">
+        <div class="icon_container" onclick="window.location.href='/pages/search_remittance.php'">
             <img src="<?= $basepath ?>/src/img/remittanceIcon.svg" alt="Remittance icon">
         </div>
     </div>
@@ -82,14 +82,14 @@ include ROOT . "/includes/cnx.inc.php";
                     <img src="<?= $basepath ?>/src/img/unpaid.svg" alt="Unpaid icon">
                 </div>
 
-                <div class="icon_container" onclick="window.location.href='/pages/laura_la_plus_belle.php'">
+                <div class="icon_container" onclick="window.location.href='/pages/search_remittance.php'">
                     <img src="<?= $basepath ?>/src/img/remittanceIcon.svg" alt="Remittance icon">
                 </div>
             </div>
         </div>
     </section>
 
-    <form action="/pages/laura_la_plus_belle.php" method="post" class="client__form">
+    <form action="/pages/search_remittance.php" method="post" class="client__form">
 
         <?php if ($_SESSION['niveau'] == 3) : ?>
             <div class="form__group">
@@ -134,22 +134,22 @@ include ROOT . "/includes/cnx.inc.php";
     </section>
 
     <?php
-    if ((isset($_GET['dd']) && isset($_GET['df']) && isset($_GET['remise'])) && isset($_SESSION['niveau'])) {
+    if ((isset($_POST['dd']) && isset($_POST['df']) && isset($_POST['remise'])) && isset($_SESSION['niveau'])) {
         $SIREN;
         $Raison_Sociale;
-        $dd = $_GET['dd'];
-        $df = $_GET['df'];
+        $dd = $_POST['dd'];
+        $df = $_POST['df'];
         if ($_SESSION['niveau'] == 3) { // si connecté en tant que PO
-            if (!isset($_GET['siren']) || !isset($_GET['rsociale'])) {
+            if (!isset($_POST['siren']) || !isset($_POST['rsociale'])) {
                 header("Location: login.php");
             }
-            if (!empty($_GET['siren'])) {
-                $SIREN = $_GET['siren'];
+            if (!empty($_POST['siren'])) {
+                $SIREN = $_POST['siren'];
             } else {
                 $SIREN = '%';
             }
-            if (!empty($_GET['rsociale'])) {
-                $Raison_Sociale = $_GET['rsociale'];
+            if (!empty($_POST['rsociale'])) {
+                $Raison_Sociale = $_POST['rsociale'];
             } else {
                 $Raison_Sociale = '%';
             }
@@ -159,13 +159,13 @@ include ROOT . "/includes/cnx.inc.php";
             }
             $SIREN = $_SESSION['SIREN'];
         }
-        if (!empty($_GET['remise'])) { 
-            $num_remise = $_GET['remise'];
+        if (!empty($_POST['remise'])) { 
+            $num_remise = $_POST['remise'];
         } else {
             $num_remise = '%';
         }
 
-        if (isset($_GET['rsociale'])) { // si le champ raison sociale existe
+        if (isset($_POST['rsociale'])) { // si le champ raison sociale existe
             // récupère tous les siren et dates de traitement de remises présente entre les dates dd et df 
             $remises = $cnx->prepare("SELECT DISTINCT SIREN, date_traitement FROM Commercant NATURAL JOIN Transaction WHERE SIREN LIKE :siren AND num_remise LIKE :num_remise AND Raison_sociale LIKE :raison_sociale AND date_traitement BETWEEN :dd AND :df");
             $remises->bindParam(':siren', $SIREN); // SIREN, '%' si aucun siren renseigné, permettant de rechercher tous les sirens
