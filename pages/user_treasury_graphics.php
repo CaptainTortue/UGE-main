@@ -16,6 +16,7 @@ foreach ($array_date as $date_array) {
         WHERE SIREN LIKE :siren
         GROUP BY SIREN");
     $sql->bindParam(':siren', $SIREN);
+    $sql->bindParam(':date', $date_array);
     $sql->execute();
     $result = $sql->fetch(PDO::FETCH_OBJ);
     if (!empty($result)) {
