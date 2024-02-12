@@ -39,9 +39,9 @@ if (isset($_SESSION['niveau'])) {
         header("Location: /pages/treasury.php");
     } else if ($_SESSION['niveau'] == 2) {
         include ROOT . "/includes/components/admin__clients_manage.php";
-        header("Location: /pages/treasury.php");
     } else if ($_SESSION['niveau'] == 3) {
         include ROOT . "/includes/components/product_owner__home.php";
+        header("Location: /pages/treasury.php");
     }
     ?>
 
